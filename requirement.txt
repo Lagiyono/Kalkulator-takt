@@ -1,0 +1,64 @@
+import pandas as pd
+import streamlit as st
+
+# Konfigurasi Tampilan
+st.set_page_config(page_title="Kalkulator Takt Time", page_icon="⏱️")
+st.title("📊 Kalkulator Target Produksi")
+
+# Input Takt Time (bisa diubah di HP)
+takt_time = st.number_input(
+    "Masukkan Takt Time (Menit):", min_value=0.1, value=13.0, step=0.1
+)
+
+# Data Tabel sesuai jadwal Anda
+data = [
+    {"NO": 1, "Mulai": "7:30:00 AM", "Selesai": "8:00:00 AM", "Durasi_Menit": 30},
+    {"NO": 2, "Mulai": "8:00:00 AM", "Selesai": "9:00:00 AM", "Durasi_Menit": 60},
+    {"NO": 3, "Mulai": "9:00:00 AM", "Selesai": "10:00:00 AM", "Durasi_Menit": 60},
+    {
+        "NO": 4,
+        "Mulai": "10:10:00 AM",
+        "Selesai": "11:00:00 AM",
+        "Durasi_Menit": 50,
+    },
+    {
+        "NO": 5,
+        "Mulai": "11:00:00 AM",
+        "Selesai": "11:45:00 AM",
+        "Durasi_Menit": 45,
+    },
+    {"NO": 6, "Mulai": "12:30:00 PM", "Selesai": "1:00:00 PM", "Durasi_Menit": 30},
+    {"NO": 7, "Mulai": "1:00:00 PM", "Selesai": "2:00:00 PM", "Durasi_Menit": 60},
+    {
+        "NO": 8,
+        "Mulai": "2:10:00 PM",
+        "Selesai": "3:00:00 PM",
+        "Durasi_Menit": 50,
+    },
+    {"NO": 9, "Mulai": "3:00:00 PM", "Selesai": "3:45:00 PM", "Durasi_Menit": 45},
+    {
+        "NO": 10,
+        "Mulai": "4:30:00 PM",
+        "Selesai": "5:00:00 PM",
+        "Durasi_Menit": 30,
+    },
+    {"NO": 11, "Mulai": "5:00:00 PM", "Selesai": "6:00:00 PM", "Durasi_Menit": 60},
+    {
+        "NO": 12,
+        "Mulai": "6:15:00 PM",
+        "Selesai": "7:15:00 PM",
+        "Durasi_Menit": 60,
+    },
+]
+
+df = pd.DataFrame(data)
+
+# Hitung Target Otomatis berdasarkan Takt Time
+df["Target"] = (df["Durasi_Menit"] / takt_time).round(0).astype(int)
+
+# Tampilkan Tabel
+st.table(df[["NO", "Mulai", "Selesai", "Target"]])
+
+# Total Target
+total = df["Target"].sum()
+st.metric(label="Total Target / OT 3 Jam", value=f"{total} Unit")
