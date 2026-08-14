@@ -172,22 +172,28 @@ html_code = """
         let akumulasi = 0;
 
         scheduleData.forEach((item) => {
-            let targetPerJam = Math.round(item.durasiMenit / taktTime);
-            if (targetPerJam < 1) targetPerJam = 1;
+            // Hitung nilai asli desimal tanpa dibulatkan Math.round
+            let rawTarget = item.durasiMenit / taktTime;
             
-            akumulasi += targetPerJam;
-            totalTarget += targetPerJam;
+            // Akumulasi menggunakan angka desimal asli agar akurat
+            akumulasi += rawTarget;
+            totalTarget += rawTarget;
+
+            // Format string dengan 1 angka di belakang koma dan ubah titik (.) jadi koma (,)
+            let targetStr = rawTarget.toFixed(1).replace('.', ',');
+            let akumulasiStr = akumulasi.toFixed(1).replace('.', ',');
 
             let row = `<tr>
                 <td>${item.no}</td>
                 <td>${item.start} - ${item.end}</td>
-                <td>${targetPerJam}</td>
-                <td><b>${akumulasi}</b></td>
+                <td>${targetStr}</td>
+                <td><b>${akumulasiStr}</b></td>
             </tr>`;
             tbody.innerHTML += row;
         });
 
-        document.getElementById('totalTarget').innerText = totalTarget;
+        // Tampilkan total akhir dengan format desimal (1 angka di belakang koma)
+        document.getElementById('totalTarget').innerText = totalTarget.toFixed(1).replace('.', ',');
         totalLabel.innerText = (shift === "Day") ? "Total Target / OT 3 Jam" : "OT 1,5 JAM";
     }
 
