@@ -141,7 +141,7 @@ html_code = """
         { no: 7, start: "13:00", end: "14:00", durasiMenit: 60 },
         { no: 8, start: "14:10", end: "15:00", durasiMenit: 50 },
         { no: 9, start: "15:00", end: "15:45", durasiMenit: 45 },
-        { no: 10, start: "16:30", end: "17:00", durasiMenit: 30 },
+        { no: 10, start: "16:30", end: "17:00", durasiMenit: 45 },
         { no: 11, start: "17:00", end: "18:00", durasiMenit: 60 },
         { no: 12, start: "18:15", end: "19:15", durasiMenit: 60 }
     ];
@@ -155,7 +155,7 @@ html_code = """
         { no: 6, start: "02:00", end: "02:30", durasiMenit: 30 },
         { no: 7, start: "02:30", end: "04:00", durasiMenit: 90 },
         { no: 8, start: "04:00", end: "04:15", durasiMenit: 15 },
-        { no: 9, start: "05:00", end: "06:00", durasiMenit: 60 },
+        { no: 9, start: "05:00", end: "06:00", durasiMenit: 75 },
         { no: 10, start: "06:00", end: "06:15", durasiMenit: 15 }
     ];
 
