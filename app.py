@@ -1,3 +1,7 @@
+import streamlit as st
+
+# Menyimpan kode HTML ke dalam variabel string
+html_code = """
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -101,7 +105,6 @@
 </div>
 
 <script>
-    // Data jam sesuai dengan gambar Anda
     const scheduleData = [
         { no: 1, start: "07:30", end: "08:00", durasiMenit: 30 },
         { no: 2, start: "08:00", end: "09:00", durasiMenit: 60 },
@@ -126,10 +129,8 @@
         let akumulasi = 0;
 
         scheduleData.forEach((item) => {
-            // Rumus Target per Jam = Durasi Jam (dalam menit) / Takt Time
-            // Dibulatkan ke bawah atau menggunakan Math.round sesuai kebutuhan shift
             let targetPerJam = Math.round(item.durasiMenit / taktTime);
-            if (targetPerJam < 1) targetPerJam = 1; // Minimal target 1 jika durasi mencukupi
+            if (targetPerJam < 1) targetPerJam = 1;
             
             akumulasi += targetPerJam;
             totalTarget += targetPerJam;
@@ -146,9 +147,12 @@
         document.getElementById('totalTarget').innerText = totalTarget;
     }
 
-    // Jalankan saat pertama kali dibuka
     hitungTarget();
 </script>
 
 </body>
 </html>
+"""
+
+# Merender HTML ke dalam Streamlit (atur tinggi sesuai kebutuhan, misal 650px)
+st.components.v1.html(html_code, height=650, scrolling=True)
