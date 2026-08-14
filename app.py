@@ -38,13 +38,31 @@ html_code = """
             align-items: center;
             justify-content: space-between;
             font-weight: bold;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
         .takt-box input {
             width: 80px;
             padding: 5px;
             font-size: 16px;
             text-align: center;
+            font-weight: bold;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .shift-box {
+            background: #e3f2fd;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .shift-box select {
+            width: 120px;
+            padding: 5px;
+            font-size: 14px;
             font-weight: bold;
             border: 1px solid #ccc;
             border-radius: 4px;
@@ -82,6 +100,14 @@ html_code = """
         <input type="number" id="taktInput" value="13" step="0.1" oninput="hitungTarget()">
     </div>
 
+    <div class="shift-box">
+        <span>Shift:</span>
+        <select id="shiftSelect" onchange="hitungTarget()">
+            <option value="Day">Day</option>
+            <option value="Night">Night</option>
+        </select>
+    </div>
+
     <table>
         <thead>
             <tr>
@@ -96,7 +122,7 @@ html_code = """
         </tbody>
         <tfoot>
             <tr class="total-row">
-                <td colspan="2">Total Target / OT 3 Jam</td>
+                <td colspan="2" id="totalLabel">Total Target / OT 3 Jam</td>
                 <td id="totalTarget">0</td>
                 <td id="totalAkumulasi">-</td>
             </tr>
@@ -105,7 +131,7 @@ html_code = """
 </div>
 
 <script>
-    const scheduleData = [
+    const dataDay = [
         { no: 1, start: "07:30", end: "08:00", durasiMenit: 30 },
         { no: 2, start: "08:00", end: "09:00", durasiMenit: 60 },
         { no: 3, start: "09:00", end: "10:00", durasiMenit: 60 },
@@ -120,11 +146,28 @@ html_code = """
         { no: 12, start: "18:15", end: "19:15", durasiMenit: 60 }
     ];
 
+    const dataNight = [
+        { no: 1, start: "21:15", end: "22:00", durasiMenit: 45 },
+        { no: 2, start: "22:10", end: "23:00", durasiMenit: 50 },
+        { no: 3, start: "23:00", end: "00:00", durasiMenit: 60 },
+        { no: 4, start: "00:30", end: "01:00", durasiMenit: 30 },
+        { no: 5, start: "01:00", end: "02:00", durasiMenit: 60 },
+        { no: 6, start: "02:00", end: "02:30", durasiMenit: 30 },
+        { no: 7, start: "02:30", end: "04:00", durasiMenit: 90 },
+        { no: 8, start: "04:00", end: "04:15", durasiMenit: 15 },
+        { no: 9, start: "05:00", end: "06:00", durasiMenit: 60 },
+        { no: 10, start: "06:00", end: "06:15", durasiMenit: 15 }
+    ];
+
     function hitungTarget() {
         const taktTime = parseFloat(document.getElementById('taktInput').value) || 1;
+        const shift = document.getElementById('shiftSelect').value;
         const tbody = document.getElementById('tableBody');
+        const totalLabel = document.getElementById('totalLabel');
+        
         tbody.innerHTML = "";
         
+        let scheduleData = (shift === "Day") ? dataDay : dataNight;
         let totalTarget = 0;
         let akumulasi = 0;
 
@@ -145,6 +188,7 @@ html_code = """
         });
 
         document.getElementById('totalTarget').innerText = totalTarget;
+        totalLabel.innerText = (shift === "Day") ? "Total Target / OT 3 Jam" : "OT 1,5 JAM";
     }
 
     hitungTarget();
@@ -154,5 +198,5 @@ html_code = """
 </html>
 """
 
-# Merender HTML ke dalam Streamlit (atur tinggi sesuai kebutuhan, misal 650px)
-st.components.v1.html(html_code, height=650, scrolling=True)
+# Merender HTML ke dalam Streamlit
+st.components.v1.html(html_code, height=680, scrolling=True)
