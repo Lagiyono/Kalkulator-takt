@@ -142,7 +142,7 @@ html_code = """
         { no: 8, start: "14:10", end: "15:00", durasiMenit: 50 },
         { no: 9, start: "15:00", end: "15:45", durasiMenit: 45 },
         { no: 10, start: "16:30", end: "17:00", durasiMenit: 45 },
-        { no: 11, start: "17:00", end: "18:00", durasiMenit: 60 },
+        { no: 11, start: "17:00", end: "18:15", durasiMenit: 75 },
         { no: 12, start: "18:15", end: "19:15", durasiMenit: 60 }
     ];
 
