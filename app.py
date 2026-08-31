@@ -152,8 +152,8 @@ html_code = """
         { no: 3, start: "23:00", end: "00:00", durasiMenit: 60 },
         { no: 4, start: "00:30", end: "01:00", durasiMenit: 30 },
         { no: 5, start: "01:00", end: "02:00", durasiMenit: 60 },
-        { no: 6, start: "02:00", end: "02:30", durasiMenit: 30 },
-        { no: 7, start: "02:30", end: "04:00", durasiMenit: 90 },
+        { no: 6, start: "02:00", end: "03:00", durasiMenit: 50 },
+        { no: 7, start: "03:00", end: "04:00", durasiMenit: 60 },
         { no: 8, start: "04:00", end: "04:15", durasiMenit: 15 },
         { no: 9, start: "05:00", end: "06:00", durasiMenit: 75 },
         { no: 10, start: "06:00", end: "06:15", durasiMenit: 15 }
